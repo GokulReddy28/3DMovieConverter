@@ -1,146 +1,161 @@
-# 🎬 TriDify – AI-Powered 3D Movie Converter  
-Convert any 2D video into immersive **3D (Hybrid Depth + Motion)** using AI depth estimation, optical flow, and audio-preserving rendering.
+🎥 TriDify – AI-Powered 3D Movie Converter
 
----
+Convert any 2D video into 3D (Hybrid Depth + Optical Flow + Audio Retention) using advanced AI depth estimation and smart stereo reconstruction.
 
-## 🚀 Features
+This project includes:
 
-✔ **AI Depth Estimation** using MiDaS DPT-Hybrid  
-✔ **Hybrid Depth + Motion Flow Algorithm**  
-✔ **Smooth Stereo (Left–Right) Rendering**  
-✔ **Original Audio Preservation**  
-✔ **Fast Optical Flow & Efficient Warping**  
-✔ **Progress Tracker (FPS, ETA, %) when using EXE**  
-✔ **GPU Acceleration (CUDA if available)**  
-✔ **Supports any video format (MP4, MKV, etc.)**  
-✔ **Optional GUI Application**  
-✔ **Offline-ready engine (no internet needed)**  
+✅ AI depth estimation (MiDaS DPT-Hybrid)
+✅ Motion-aware blended depth
+✅ Stereo 3D (Red-Cyan Anaglyph) generation
+✅ Audio extraction + re-merge
+✅ FPS tracking
+✅ ETA prediction
+✅ Optimized GUI & CLI
+✅ Real-time preview (optional scripts)
 
----
+🚀 Features
+🎞️ Hybrid Depth System
 
-## 🧠 How It Works
+AI depth from MiDaS (DPT-Hybrid)
 
-### 1️⃣ Depth Estimation  
-MiDaS DPT-Hybrid predicts a depth map for keyframes.
+Optical flow-based motion depth
 
-### 2️⃣ Motion-Aware Depth  
-Optical flow propagates depth forward between frames for speed.
+Smart fusion for stable interpolated frames
 
-### 3️⃣ Hybrid Depth Blending  
-Depth = 70% AI depth + 30% motion depth  
-→ Produces smoother & more stable 3D.
+🎧 Audio Preservation
 
-### 4️⃣ Stereo Generation  
-Each pixel is shifted left/right based on depth → anaglyph 3D output.
+Extracts original audio
 
-### 5️⃣ Audio Merge  
-FFmpeg merges original audio back with the generated 3D video.
+Merges it back into the converted 3D video
 
----
+⚡ Performance
 
-## 📂 Project Structure
-3DMovieConverter/
-│── convert_movie_to_3d_hybrid_audio.py # Main engine (CLI)
-│── tridify_gui.py # GUI version (optional)
-│── assets/ # Icons & images
-│── test scripts/ # GPU tests, real-time tools
-│── README.md # This file
-│── .gitignore
+FPS tracking
 
+Remaining time estimation
 
----
+Motion-aware depth smoothing
 
-## 🛠️ Installation
+Optional GPU acceleration (CUDA when available)
 
-### **1. Install Python 3.10–3.12**
-https://www.python.org/downloads/
+🖥️ GUI Application
 
-### **2. Install required libraries**
+Simplified GUI for:
 
-```bash
-pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
-pip install opencv-python transformers numpy
+Choosing input/output file
 
+Running conversion
 
-If CPU only:
-
-pip install torch opencv-python transformers numpy
-
-▶️ Run Conversion (CLI Mode)
-python convert_movie_to_3d_hybrid_audio.py input.mp4 output_3d.mp4
-
-
-Example:
-
-python convert_movie_to_3d_hybrid_audio.py myvideo.mp4 myvideo_3d.mp4
-
-🖥️ Run GUI Version
-python tridify_gui.py
-
-
-You can browse:
-
-Input video
-
-Output file
-
-Engine EXE
-
-Start conversion
+Live progress
 
 Preview output
 
-📦 Build Standalone EXE (Windows)
-First install PyInstaller:
-pip install pyinstaller
+🛠️ CLI Tool
 
-Build engine EXE:
+Full control through terminal:
+
+python convert_movie_to_3d_hybrid_audio.py input.mp4 output_3d.mp4
+
+📁 Project Structure
+3DProject/
+│
+├── convert_movie_to_3d_hybrid_audio.py   # Main AI engine
+├── tridify_gui.py                        # GUI app
+├── real_time_3d_preview.py               # Optional modules
+├── real_time_depth.py
+├── real_time_anaglyph.py
+├── real_time_wiggle_3d.py
+│
+├── assets/
+│   ├── icon.ico
+│   ├── logo.png
+│   ├── splash.png
+│
+├── README.md
+├── .gitignore
+
+▶️ How to Use (GUI Version)
+1️⃣ Launch GUI
+
+Run:
+
+python tridify_gui.py
+
+2️⃣ Select Input & Output
+
+Browse and pick your 2D input video
+
+Choose where to save the 3D output
+
+3️⃣ Start Conversion
+
+You will see:
+
+Progress %
+
+FPS
+
+ETA (Estimated time remaining)
+
+4️⃣ Output
+
+Final 3D video will appear as:
+
+output_3d.mp4
+
+▶️ How to Use (CLI Version)
+python convert_movie_to_3d_hybrid_audio.py "input.mp4" "output_3d.mp4"
+
+
+You will see logs like:
+
+PROG: 85% | FPS: 8.24 | ETA: 00:00:06
+
+🛠️ Build Executable (EXE)
+
+To create a standalone .exe:
+
+Step 1 — Engine EXE
 pyinstaller --noconfirm --onefile convert_movie_to_3d_hybrid_audio.py
 
-Build GUI EXE:
+Step 2 — GUI EXE
 pyinstaller --noconfirm --windowed --icon=assets/icon.ico --add-data "assets;assets" tridify_gui.py
 
 
-Your EXEs will appear inside:
+Final executables appear in:
 
 dist/
 
-📊 Performance
-Hardware	FPS	Notes
-GTX 1650	~8 FPS	Smooth conversion
-RTX 3050	~14 FPS	Fast 3D conversion
-CPU Only	1–2 FPS	Very slow
+📌 Requirements
+Python Dependencies
+opencv-python
+numpy
+torch
+transformers
+ttk
+customtkinter (optional GUI)
 
-GPU recommended.
+External Requirements
 
-🎨 Preview of 3D Output (Anaglyph)
+FFmpeg installed & added to PATH
 
-Red = left eye
+GPU (optional) for faster processing
 
-Cyan = right eye
+⚙️ How It Works (Simplified)
 
-Works with any red/cyan 3D glasses
+1️⃣ Extract audio from input
+2️⃣ Run AI depth estimation on keyframes
+3️⃣ Generate depth using optical flow for in-between frames
+4️⃣ Blend depth maps
+5️⃣ Convert depth → stereo 3D anaglyph
+6️⃣ Re-encode video
+7️⃣ Re-merge original audio
 
-📝 Known Limitations
+📝 License
 
-⚠ Slow on CPU
-⚠ Not real-time for large videos
-⚠ Anaglyph colors may slightly distort original colors
+MIT License – free to use, modify, and distribute.
 
-🤝 Contributing
+❤️ Author
 
-Pull requests welcome!
-If you improve depth/blending/GUI, feel free to contribute.
-
-⭐ Support the Project
-
-If this helped you:
-
-⭐ Star the repo
-🍴 Fork it
-🐛 Report issues
-
-📬 Contact
-
-Author: GokulNanda HV (Gokul Reddy)
+Gokul Nanda H V
 GitHub: https://github.com/GokulReddy28
