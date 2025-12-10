@@ -1,0 +1,34 @@
+@"
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+*.spec
+venv/
+env/
+.env
+
+# PyInstaller outputs / EXEs / installers
+*.exe
+*.dll
+dist/
+build/
+
+# models and large binaries
+models/
+*.pt
+*.pth
+*.safetensors
+
+# temp files, logs, outputs
+*.log
+temp_*.*
+output*.mp4
+
+# VSCode
+.vscode/
+"@ > .gitignore
